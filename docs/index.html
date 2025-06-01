@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Baileys Rise Documentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Modern WhatsApp API Documentation" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+  <!-- Docsify Theme -->
+  <link id="theme-style" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css" />
+
+  <style>
+    :root {
+      /* Light Theme */
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-tertiary: #f1f5f9;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --accent-primary: #6366f1;
+      --accent-secondary: #8b5cf6;
+      --border-color: #e2e8f0;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      --gradient-secondary: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    }
+
+    body.dark-mode {
+      /* Dark Theme */
+      --bg-primary: #111827;
+      --bg-secondary: #1f2937;
+      --bg-tertiary: #374151;
+      --text-primary: #ffffff;
+      --text-secondary: #e5e7eb;
+      --text-muted: #9ca3af;
+      --accent-primary: #60a5fa;
+      --accent-secondary: #a78bfa;
+      --border-color: #4b5563;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+      --gradient-primary: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+      --gradient-secondary: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-secondary);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-primary);
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border-color);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(10px);
+    }
+
+    .sidebar-toggle-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      position: sticky;
+      top: 0;
+      background: var(--gradient-secondary);
+      backdrop-filter: blur(20px);
+      z-index: 10;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .brand-title {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-icon {
+      width: 24px;
+      height: 24px;
+      background: var(--gradient-primary);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.8rem;
+    }
+
+    .dark-toggle {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .dark-toggle:hover {
+      background: var(--accent-primary);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Content Styling */
+    .content {
+      background: var(--bg-primary);
+      min-height: 100vh;
+    }
+
+    .markdown-section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* Typography */
+    .markdown-section h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .markdown-section h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin: 2rem 0 1rem 0;
+      color: var(--text-primary);
+      position: relative;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .markdown-section h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem 0;
+      color: var(--text-primary);
+    }
+
+    .markdown-section p {
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+    }
+
+    /* Code Blocks */
+    .markdown-section pre {
+      background: var(--bg-secondary) !important;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      overflow-x: auto;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+
+    .markdown-section code {
+      font-family: 'JetBrains Mono', 'Fira Code', Monaco, 'Cascadia Code', monospace;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-primary) !important;
+    }
+
+    .markdown-section pre code {
+      color: var(--text-primary) !important;
+      background: transparent !important;
+    }
+
+    .markdown-section p code {
+      background: var(--bg-tertiary) !important;
+      color: var(--accent-primary) !important;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Links */
+    .markdown-section a {
+      color: var(--accent-primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .markdown-section a:hover {
+      color: var(--accent-secondary);
+      border-bottom-color: var(--accent-secondary);
+    }
+
+    /* Copy Code Button */
+    .docsify-copy-code-button {
+      background: var(--accent-primary) !important;
+      color: white !important;
+      border-radius: 6px !important;
+      font-size: 0.8rem !important;
+      padding: 0.4rem 0.8rem !important;
+      border: none !important;
+      font-weight: 500 !important;
+      transition: all 0.2s ease !important;
+      top: 1rem !important;
+      right: 1rem !important;
+    }
+
+    .docsify-copy-code-button:hover {
+      background: var(--accent-secondary) !important;
+      transform: translateY(-1px) !important;
+    }
+
+    /* Search */
+    .search {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .search input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: var(--bg-primary) !important;
+      color: var(--text-primary) !important;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+
+    .search input:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
+    .search input::placeholder {
+      color: var(--text-muted) !important;
+    }
+
+    /* Force search visibility in dark mode */
+    body.dark-mode .search input {
+      background: var(--bg-primary) !important;
+      color: var(--text-primary) !important;
+      border-color: var(--border-color);
+    }
+
+    body.dark-mode .search input::placeholder {
+      color: var(--text-muted) !important;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar-nav {
+      padding: 1rem;
+    }
+
+    .sidebar-nav ul {
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar-nav li {
+      list-style: none;
+      margin: 0.25rem 0;
+    }
+
+    .sidebar-nav a {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      color: var(--text-secondary) !important;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+
+    .sidebar-nav a:hover {
+      background: var(--bg-tertiary) !important;
+      color: var(--text-primary) !important;
+    }
+
+    .sidebar-nav a.active {
+      background: var(--accent-primary) !important;
+      color: white !important;
+    }
+
+    /* Force visibility for dark mode */
+    body.dark-mode .sidebar-nav a {
+      color: var(--text-secondary) !important;
+    }
+
+    body.dark-mode .sidebar-nav a:hover {
+      color: var(--text-primary) !important;
+      background: var(--bg-tertiary) !important;
+    }
+
+    body.dark-mode .sidebar-nav a.active {
+      color: white !important;
+      background: var(--accent-primary) !important;
+    }
+
+    /* Animations */
+    #app {
+      animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Loading Animation */
+    .loading {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      z-index: 1000;
+      color: var(--text-primary);
+    }
+
+    .loading p {
+      color: var(--text-secondary) !important;
+      margin: 0;
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border-color);
+      border-top: 3px solid var(--accent-primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .sidebar-toggle-wrapper {
+        padding: 1rem;
+      }
+
+      .brand-title {
+        font-size: 1rem;
+      }
+
+      .markdown-section {
+        padding: 1rem;
+      }
+
+      .markdown-section h1 {
+        font-size: 2rem;
+      }
+
+      .markdown-section h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Docsify Override Styles - Force Dark Mode Compatibility */
+    body.dark-mode .app-name-link {
+      color: var(--text-primary) !important;
+    }
+
+    body.dark-mode .sidebar ul li a {
+      color: var(--text-secondary) !important;
+    }
+
+    body.dark-mode .sidebar ul li a:hover {
+      color: var(--text-primary) !important;
+    }
+
+    body.dark-mode .sidebar ul li.active > a {
+      color: var(--accent-primary) !important;
+      font-weight: 600;
+    }
+
+    body.dark-mode .markdown-section {
+      color: var(--text-primary) !important;
+    }
+
+    body.dark-mode .markdown-section p,
+    body.dark-mode .markdown-section li,
+    body.dark-mode .markdown-section td {
+      color: var(--text-secondary) !important;
+    }
+
+    body.dark-mode .markdown-section h1,
+    body.dark-mode .markdown-section h2,
+    body.dark-mode .markdown-section h3,
+    body.dark-mode .markdown-section h4,
+    body.dark-mode .markdown-section h5,
+    body.dark-mode .markdown-section h6 {
+      color: var(--text-primary) !important;
+    }
+
+    body.dark-mode .markdown-section blockquote {
+      background: var(--bg-secondary) !important;
+      border-left: 4px solid var(--accent-primary) !important;
+      color: var(--text-secondary) !important;
+    }
+
+    body.dark-mode .markdown-section table {
+      background: var(--bg-secondary) !important;
+      border: 1px solid var(--border-color) !important;
+    }
+
+    body.dark-mode .markdown-section table th {
+      background: var(--bg-tertiary) !important;
+      color: var(--text-primary) !important;
+      border-bottom: 1px solid var(--border-color) !important;
+    }
+
+    body.dark-mode .markdown-section table td {
+      border-bottom: 1px solid var(--border-color) !important;
+      color: var(--text-secondary) !important;
+    }
+
+    body.dark-mode .markdown-section hr {
+      border-color: var(--border-color) !important;
+    }
+
+    /* Search Results */
+    body.dark-mode .results-panel {
+      background: var(--bg-secondary) !important;
+      border: 1px solid var(--border-color) !important;
+    }
+
+    body.dark-mode .results-panel .matching-post {
+      border-bottom: 1px solid var(--border-color) !important;
+    }
+
+    body.dark-mode .results-panel .matching-post a {
+      color: var(--text-primary) !important;
+    }
+
+    body.dark-mode .results-panel .matching-post p {
+      color: var(--text-muted) !important;
+    }
+
+    /* Pagination */
+    body.dark-mode .pagination-item a {
+      color: var(--text-secondary) !important;
+      border-color: var(--border-color) !important;
+    }
+
+    body.dark-mode .pagination-item.active a {
+      background: var(--accent-primary) !important;
+      color: white !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="loading">
+      <div class="loading-spinner"></div>
+      <p>Loading documentation...</p>
+    </div>
+  </div>
+
+  <script>
+    // Theme Management
+    const themeManager = {
+      init() {
+        const savedTheme = this.getSavedTheme();
+        if (savedTheme === 'dark' || (!savedTheme && this.prefersDarkMode())) {
+          this.enableDarkMode();
+        }
+        this.updateIcon();
+      },
+
+      getSavedTheme() {
+        return localStorage.getItem("baileys-theme");
+      },
+
+      prefersDarkMode() {
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      },
+
+      enableDarkMode() {
+        document.body.classList.add("dark-mode");
+      },
+
+      disableDarkMode() {
+        document.body.classList.remove("dark-mode");
+      },
+
+      toggle() {
+        const isDark = document.body.classList.contains("dark-mode");
+        if (isDark) {
+          this.disableDarkMode();
+          localStorage.setItem("baileys-theme", "light");
+        } else {
+          this.enableDarkMode();
+          localStorage.setItem("baileys-theme", "dark");
+        }
+        this.updateIcon();
+      },
+
+      updateIcon() {
+        const icon = document.getElementById("theme-icon");
+        if (icon) {
+          const isDark = document.body.classList.contains("dark-mode");
+          icon.className = isDark ? "fas fa-sun" : "fas fa-moon";
+        }
+      }
+    };
+
+    // Initialize theme
+    themeManager.init();
+
+    // Toggle function for button
+    function toggleTheme() {
+      themeManager.toggle();
+    }
+
+    // Docsify Configuration
+    window.$docsify = {
+      name: 'Baileys Rise',
+      repo: 'https://github.com/ClayzaAubert/baileys-rise',
+      homepage: '../README.md',
+      loadSidebar: false,
+      loadNavbar: false,
+      coverpage: false,
+      search: {
+        maxAge: 86400000,
+        paths: 'auto',
+        placeholder: 'Search documentation...',
+        noData: 'No results found.',
+        depth: 3
+      },
+      copyCode: {
+        buttonText: '📋 Copy',
+        errorText: '❌ Error',
+        successText: '✅ Copied'
+      },
+      themeColor: '#6366f1',
+      auto2top: false,
+      executeScript: false,
+      mergeNavbar: false,
+      formatUpdated: '{MM}/{DD} {HH}:{mm}',
+      plugins: [
+        function(hook, vm) {
+          hook.beforeEach(function(html) {
+            return html;
+          });
+
+          hook.afterEach(function(html, next) {
+            next(html);
+          });
+
+          hook.doneEach(function() {
+            // Remove loading animation
+            const loading = document.querySelector('.loading');
+            if (loading) {
+              loading.style.display = 'none';
+            }
+          });
+        }
+      ]
+    };
+
+    // Enhanced sidebar injection
+    function injectSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      if (sidebar && !document.querySelector('.sidebar-toggle-wrapper')) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'sidebar-toggle-wrapper';
+        wrapper.innerHTML = `
+          <div class="brand-title">
+            <div class="brand-icon">
+              <i class="fas fa-code"></i>
+            </div>
+            Baileys Rise
+          </div>
+          <button class="dark-toggle" onclick="toggleTheme()" title="Toggle theme">
+            <i id="theme-icon" class="${document.body.classList.contains('dark-mode') ? 'fas fa-sun' : 'fas fa-moon'}"></i>
+          </button>
+        `;
+        sidebar.prepend(wrapper);
+      }
+    }
+
+    // Wait for DOM and inject sidebar
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(injectSidebar, 100);
+      });
+    } else {
+      setTimeout(injectSidebar, 100);
+    }
+
+    // Periodic check for sidebar injection
+    const sidebarInterval = setInterval(() => {
+      injectSidebar();
+      if (document.querySelector('.sidebar-toggle-wrapper')) {
+        clearInterval(sidebarInterval);
+      }
+    }, 500);
+
+    // System theme change detection
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!themeManager.getSavedTheme()) {
+          if (e.matches) {
+            themeManager.enableDarkMode();
+          } else {
+            themeManager.disableDarkMode();
+          }
+          themeManager.updateIcon();
+        }
+      });
+    }
+  </script>
+
+  <!-- Docsify Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-typescript.min.js"></script>
+</body>
+</html>
