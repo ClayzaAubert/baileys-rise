@@ -1,13 +1,10 @@
 source "https://rubygems.org"
 
-# Gunakan github-pages gem untuk kompatibilitas penuh
+# GitHub Pages gem - ini akan mengatur semua dependencies
 gem "github-pages", group: :jekyll_plugins
 
-# Atau jika ingin manual:
-# gem "jekyll", "~> 3.9.0"
-# gem "jekyll-feed", "~> 0.15"
-# gem "jekyll-sitemap", "~> 1.4"
-# gem "jekyll-seo-tag", "~> 2.8"
+# Untuk development lokal (opsional)
+gem "jekyll", "~> 3.9.0"
 
 platforms :mingw, :x64_mingw, :mswin, :jruby do
   gem "tzinfo", ">= 1", "< 3"

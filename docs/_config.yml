@@ -3,26 +3,42 @@ description: Comprehensive guide for WhatsApp bot implementation
 baseurl: "/baileys-rise" # ganti dengan nama repo Anda
 url: "https://clayzaaubert.github.io" # ganti dengan username GitHub Anda
 
-# Build settings
+# Build settings - GitHub Pages compatible
 markdown: kramdown
 highlighter: rouge
 kramdown:
   input: GFM
   syntax_highlighter: rouge
 
-# Plugins yang kompatibel dengan GitHub Pages
+# Plugins yang didukung GitHub Pages
 plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
-  - jekyll-github-metadata
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+
+# GitHub Pages settings
+github:
+  is_project_page: true
+
+# Navigation
+navigation:
+  - title: Home
+    url: /
+  - title: Getting Started
+    url: /#install
+  - title: API Reference
+    url: /#sending-messages
+  - title: Examples
+    url: /#example
 
 # Theme settings
 theme_color: "#25D366"
 accent_color: "#128C7E"
 
 # SEO
-author: Clayza Aubert
+author: Your Name
 twitter:
   username: your_twitter
   card: summary
