@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Baileys Rise - WhatsApp API</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Modern WhatsApp API for Node.js">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Theme CSS -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  
+  <!-- Custom styles -->
+  <style>
+    :root {
+      --accent-color: #25D366;
+    }
+    .app-name-link img {
+      width: 32px;
+      height: 32px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">Loading...</div>
+  
+  <script>
+    window.$docsify = {
+      // Basic settings
+      name: 'Baileys Rise',
+      repo: 'https://github.com/ClayzaAubert/baileys-rise',
+      homepage: 'README.md',
+      
+      // Navigation
+      loadSidebar: true,
+      autoHeader: true,
+      subMaxLevel: 3,
+      
+      // Search
+      search: {
+        placeholder: 'Search documentation...',
+        noData: 'No results found.',
+        depth: 3
+      },
+      
+      // Copy code
+      copyCode: {
+        buttonText: 'Copy',
+        errorText: 'Error',
+        successText: 'Copied!'
+      },
+      
+      // Other features
+      coverpage: false,
+      executeScript: true,
+      maxLevel: 4,
+      mergeNavbar: true
+    }
+  </script>
+  
+  <!-- Docsify core -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  
+  <!-- Plugins -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code@2"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  
+  <!-- Language highlighting -->
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-typescript.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+</body>
+</html>
