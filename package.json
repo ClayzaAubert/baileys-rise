@@ -116,5 +116,8 @@
   },
   "bugs": {
     "url": "https://github.com/ClayzaAubert/baileys-rise/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
