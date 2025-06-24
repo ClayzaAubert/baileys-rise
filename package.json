@@ -1,6 +1,6 @@
 {
   "name": "@clayzaaubert/baileys-rise",
-  "version": "8.7.2",
+  "version": "8.7.3",
   "description": "WhatsApp API",
   "keywords": [
     "whatsapp",
@@ -11,7 +11,7 @@
     "newsletter",
     "whatsapp-bot"
   ],
-  "homepage": "https://github.com/ClayzaAubert/baileys-rise",
+  "homepage": "https://clayza.is-a.dev/baileys-rise",
   "repository": {
     "url": "git+ssh://git@github.com/ClayzaAubert/baileys-rise.git"
   },
